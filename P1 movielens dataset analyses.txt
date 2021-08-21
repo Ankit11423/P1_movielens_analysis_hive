@@ -1,0 +1,116 @@
+Uploaded the data into HDFS
+
+Created tables in HIVE from the uploaded data
+
+Writing HIVE queries to get the following results:
+
+01. first 5 entries from movies table
+=>select * form movies limit 5
+
+------------------------------------------------------------------------------------------------
+
+02. number of unique movies
+=>select count(distinct title) as count_of_unique_movies from movies;
+
+------------------------------------------------------------------------------------------------
+03. summary of ratings data
+=>SELECT m.title, r.rating from movies m
+inner join ratings r
+on m.movieId=r.movieId;
+
+-------------------------------------------------------------------------------------------------
+04. minimum rating given to a movie
+=>SELECT min(rating) from ratings;
+=>select m.title, r.rating from movies m
+inner join ratings r
+on m.movieid=r.movieid
+order by r.rating asc
+limit 1;
+
+--------------------------------------------------------------------------------------------------
+05. maximum rating given to a movie
+=>SELECT max(rating) from ratings;
+
+--------------------------------------------------------------------------------------------------
+
+06. number of unique tags 
+=> select distinct count(tag) from tags;
+
+--------------------------------------------------------------------------------------------------
+
+07. drop null rows from tags and create another table of the resulting rows
+=>create table tags2 as select * from tags 
+where userid is not null and movieid is not null and tag is not null and timestamps is not null;
+
+--------------------------------------------------------------------------------------------------
+
+08. filtering to get the list of drama movies
+=>SELECT genres FROM movies where genres RLIKE 'Drama';
+
+--------------------------------------------------------------------------------------------------
+-
+09. total number of drama movies
+=>SELECT count(genres) as count_of_drama FROM movies where genres RLIKE 'Drama';
+
+--------------------------------------------------------------------------------------------------
+
+10. filtering to get the list of comedy movies
+=>SELECT * FROM movies where genres RLIKE 'Comedy';
+
+--------------------------------------------------------------------------------------------------
+
+11. total no. of comedy movies
+=>SELECT count(genres) as count_of_comedy FROM movies where genres RLIKE 'Comedy';
+
+--------------------------------------------------------------------------------------------------
+
+12. displays first 5 data from ratings table
+=>select * form ratings limit 5
+
+---------------------------------------------------------------------------------------------------
+
+13. merging two tables movies and ratings into a new table without the "timestamp" column from the ratings table.
+=>create table newtable2 as select m.movieid, m.title, m.genres, r.userid, r.rating 
+from movies m
+inner join ratings r on m.movieid=r.movieid;
+
+----------------------------------------------------------------------------------------------------
+ 
+14. display high rated movies (rating > 4)
+=>SELECT m.title, r.rating from movies m
+inner join ratings r
+on m.movieId=r.movieId
+where r.rating > 4;
+
+-----------------------------------------------------------------------------------------------------
+
+15. display low rated movies (rating < 4)
+=>SELECT m.title, r.rating from movies m
+inner join ratings r
+on m.movieId=r.movieId
+where r.rating < 4;
+
+------------------------------------------------------------------------------------------------------
+
+16. top 25 most rated movies
+=>SELECT m.title, r.rating from movies m
+inner join ratings r
+on m.movieId=r.movieId
+order by r.rating limit 25;
+
+-------------------------------------------------------------------------------------------------------
+
+17. slicing out columns to display only title and genres columns from movies table
+=>SELECT title, genres from movies;
+
+-------------------------------------------------------------------------------------------------------
+
+18. Which movie received the highest number of ratings?
+=>select m.title, r.rating from movies m
+inner join ratings r
+on m.movieid=r.movieid
+order by r.rating desc
+limit 1;
+
+=========================================================================================================
+
