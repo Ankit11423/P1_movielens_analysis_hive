@@ -7,7 +7,7 @@ Writing HIVE queries to get the following results:
 01. first 5 entries from movies table
 =>select * form movies limit 5
 
-------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 02. number of unique movies
 =>select count(distinct title) as count_of_unique_movies from movies;
