@@ -1,5 +1,4 @@
-# P1_movielens_analysis_hive
-# PROJECT-1 HIVE
+# PROJECT-1 HIVE Movielens_analysis_hive
 ## Project Description
 BY using Hortonworks-sandbox in virtual Machine,i created directories in Hdfs and loaded the data in it,later on i created external tables using HiveQL and
 analyzed the data using some aggregations like filtering and bucketing
